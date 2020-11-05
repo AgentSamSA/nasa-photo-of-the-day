@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
-import Header from "./Components/Header/Header";
-import Footer from "./Components/Footer/Footer";
-import Image from "./Components/Image/Image";
+import Header from "./Components/Header/Header.js";
+import Footer from "./Components/Footer/Footer.js";
+import Image from "./Components/Image/Image.js";
+import {API_KEY, BASE_URL} from "./constants.js";
 
 function App() {
   const [nasaData, setNasaData] = useState("");
 
   useEffect(() => {
     axios
-      .get("https://api.nasa.gov/planetary/apod?api_key=BHmOQmb8S0nDwfdAj97ekL6lmSvbmj5NhOBDYIIJ")
+      .get(BASE_URL + API_KEY)
       .then(res => {
         console.log(res.data);
         setNasaData(res.data);
       })
       .catch(err => {
-        console.log("error", err);
+        console.log("Error", err);
+        setNasaData(err);
       })
   }, []);
 
