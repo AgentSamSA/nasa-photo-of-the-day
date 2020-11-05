@@ -5,6 +5,8 @@ import Header from "./Components/Header/Header.js";
 import Footer from "./Components/Footer/Footer.js";
 import Image from "./Components/Image/Image.js";
 import {API_KEY, BASE_URL} from "./constants.js";
+import styled from "styled-components";
+import background from "./Assets/starbackground.jpg";
 
 function App() {
   const [nasaData, setNasaData] = useState("");
@@ -23,12 +25,19 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <StyledApp className="App">
       <Header />
       <Image nasaData={nasaData} key={nasaData.date} />
       <Footer />
-    </div>
+    </StyledApp>
   );
 }
 
 export default App;
+
+const StyledApp = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  backgroun: url("")
+`;

@@ -18,26 +18,28 @@ const Image = (props) => {
             {nasaData.date}
             <br></br>
             <br></br>
-            {nasaData.media_type === "image"
-                ? <div>
-                    <div>
-                        <img src={nasaData.url} alt={`NASA's Image of the day for ${nasaData.date}`} />
+            <div className="display-section">
+                {nasaData.media_type === "image"
+                    ? <div>
+                        <div>
+                            <img src={nasaData.url} alt={`NASA's Image of the day for ${nasaData.date}`} />
+                        </div>
+                        <br></br>
+                        <div>
+                            <button><a href={nasaData.hdurl} target="_blank" style={buttonStyle}>View HD (opens in new window)</a></button>
+                        </div>
                     </div>
-                    <br></br>
-                    <div>
-                        <button><a href={nasaData.hdurl} target="_blank" style={buttonStyle}>View HD (opens in new window)</a></button>
+                    : <div>
+                        <div>
+                            <iframe title="NASA video of the day" width="800" height="600" src={nasaData.url + "?controls=0"}></iframe>
+                        </div>
+                        <br></br>
                     </div>
-                </div>
-                : <div>
-                    <div>
-                        <iframe title="NASA video of the day" width="800" height="600" src={nasaData.url + "?controls=0"}></iframe>
-                    </div>
-                    <br></br>
-                    </div>
-            }
+                }
 
-            <p>{nasaData.explanation}</p>
-                </div>
+                <p>{nasaData.explanation}</p>
+            </div>
+        </div>
     )
 }
 
