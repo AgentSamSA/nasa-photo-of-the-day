@@ -6,14 +6,14 @@ import Footer from "./Components/Footer/Footer.js";
 import Image from "./Components/Image/Image.js";
 import {API_KEY, BASE_URL} from "./constants.js";
 import styled from "styled-components";
-import background from "./Assets/starbackground.jpg";
+import Background from "./Assets/starbackground.jpg";
 
 function App() {
   const [nasaData, setNasaData] = useState("");
 
   useEffect(() => {
     axios
-      .get(BASE_URL + API_KEY)
+      .get(BASE_URL + API_KEY + "&date=2020-11-04")
       .then(res => {
         console.log(res.data);
         setNasaData(res.data);
@@ -39,5 +39,7 @@ const StyledApp = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  backgroun: url("")
+  background-image: url(${Background});
+  background-size: cover;
+  color: ${pr => pr.theme.white};
 `;
