@@ -1,5 +1,3 @@
-import {fontImport} from "../constants.js";
-
 export default {
     black: "black",
     white: "white",
@@ -8,5 +6,4 @@ export default {
         tablet: "(max-width: 800px)",
         bigTablet: "(max-width: 1400px)",
     },
-    fontImport: fontImport,
 };

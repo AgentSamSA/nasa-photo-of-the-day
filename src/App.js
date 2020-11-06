@@ -14,7 +14,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get(BASE_URL + API_KEY + "&date=" + date)
+      .get(BASE_URL + API_KEY)
       .then(res => {
         console.log(res.data);
         setNasaData(res.data);
@@ -23,13 +23,13 @@ function App() {
         console.log("Error", err);
         setNasaData(err);
       });
-  }, [date]);
+  }, []);
 
   return (
     <StyledApp className="App">
       <Header />
       <Image nasaData={nasaData} key={nasaData.date} />
-      <Footer setDate={setDate}/>
+      <Footer date={date} setDate={setDate} setNasaData={setNasaData} api={API_KEY} base={BASE_URL}/>
     </StyledApp>
   );
 }
@@ -43,8 +43,6 @@ const StyledApp = styled.div`
   background-image: url(${Background});
   background-size: 100% 100%;
   color: ${pr => pr.theme.white};
-
-  @import url(${pr => pr.theme.fontImport});
 
   font-family: 'Montserrat', sans-serif;
 `;

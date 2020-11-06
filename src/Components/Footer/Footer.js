@@ -1,21 +1,35 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 export default function Footer(props) {
 
-    const { setDate } = props;
+    const { date, setDate, setNasaData, api, base } = props;
 
     const [dateValue, setDateValue] = useState("");
 
     const getDateValue = (event) => {
         setDateValue(event.target.value);
     }
-    
+
     const getNewDate = (event) => {
         let newDate = dateValue;
         console.log(newDate);
         setDate(newDate);
     }
+
+    useEffect(() => {
+        axios
+            .get(base + api + "&date=" + date)
+            .then(res => {
+                console.log(res.data);
+                setNasaData(res.data);
+            })
+            .catch(err => {
+                console.log("Error", err);
+                setNasaData(err);
+            });
+    }, [date]);
 
     return (
         <StyledFooter>
