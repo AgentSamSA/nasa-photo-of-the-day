@@ -13,32 +13,28 @@ const Image = (props) => {
     }
 
     return (
-        <div>
-            <h3>{nasaData.title}</h3>
-
-            {nasaData.date}
-            <br></br>
-            <br></br>
-            <StyledDisplay>
-                {nasaData.media_type === "image"
-                    ? <div className="media-container">
-                        <div>
-                            <img src={nasaData.url} alt={`NASA's Image of the day for ${nasaData.date}`} />
-                        </div>
-                        <div>
-                            <button><a href={nasaData.hdurl} target="_blank" style={buttonStyle}>View HD (opens in new window)</a></button>
-                        </div>
+        <StyledDisplay>
+            {nasaData.media_type === "image"
+                ? <div className="media-container">
+                    <div>
+                        <img src={nasaData.url} alt={`NASA's Image of the day for ${nasaData.date}`} />
                     </div>
-                    : <div className="media-container">
-                        <div>
-                            <iframe title="NASA video of the day" width="800" height="600" src={nasaData.url + "?controls=0"}></iframe>
-                        </div>
+                    <div>
+                        <button><a href={nasaData.hdurl} target="_blank" style={buttonStyle}>View HD (opens in new window)</a></button>
                     </div>
-                }
-
-                <p className="text-container">{nasaData.explanation}</p>
-            </StyledDisplay>
-        </div>
+                </div>
+                : <div className="media-container">
+                    <div>
+                        <iframe title="NASA video of the day" width="800" height="500" src={nasaData.url + "?controls=0"}></iframe>
+                    </div>
+                </div>
+            }
+            <div className="text-container">
+                <h2>{nasaData.title}</h2>
+                <p>{nasaData.date}</p>
+                <p>{nasaData.explanation}</p>
+            </div>
+        </StyledDisplay>
     )
 }
 
@@ -48,6 +44,7 @@ const StyledDisplay = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    align-items: flex-start;
 
     .media-container {
         display: flex;
@@ -58,6 +55,8 @@ const StyledDisplay = styled.div`
 
     img {
         width: 100%;
+        background-color: ${pr => pr.theme.white};
+        padding: 5px;
     }
 
     button {
@@ -66,6 +65,42 @@ const StyledDisplay = styled.div`
 
     .text-container {
         width: 30%;
-        align-self: baseline;
+        color: ${pr => pr.theme.white};
+        background: ${pr => pr.theme.black};
+        font-size: 1.3rem;
+    }
+
+    @media ${pr => pr.theme.breakPoints.bigTablet} {
+        flex-direction: column;
+        align-items: center;
+
+        .media-container {
+            width: 90%;
+        }
+
+        .text-container {
+            width: 90%;
+            font-size: 1.2rem;
+        }
+    }
+
+    @media ${pr => pr.theme.breakPoints.tablet} {
+        iframe {
+            width: 500px;
+            height: 350px;
+        }
+        .text-container {
+            font-size: 1rem;
+        }
+    }
+
+    @media ${pr => pr.theme.breakPoints.mobile} {
+        iframe {
+            width: 300px;
+            height: 200px;
+        }
+        .text-container {
+            font-size: .7rem;
+        }
     }
 `;

@@ -13,7 +13,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get(BASE_URL + API_KEY + "&date=2020-11-04")
+      .get(BASE_URL + API_KEY + "&date=2020-11-03")
       .then(res => {
         console.log(res.data);
         setNasaData(res.data);
@@ -21,7 +21,8 @@ function App() {
       .catch(err => {
         console.log("Error", err);
         setNasaData(err);
-      })
+      });
+      return {}
   }, []);
 
   return (
@@ -40,6 +41,10 @@ const StyledApp = styled.div`
   flex-direction: column;
   align-items: center;
   background-image: url(${Background});
-  background-size: cover;
+  background-size: 100% 100%;
   color: ${pr => pr.theme.white};
+
+  @import url(${pr => pr.theme.fontImport});
+
+  font-family: 'Montserrat', sans-serif;
 `;

@@ -24,4 +24,15 @@ const StyledHeader = styled.div`
     h1 {
         align-self: baseline;
     }
+
+    @media ${pr => pr.theme.breakPoints.tablet} {
+        width: 80%;
+    }
+
+    @media ${pr => pr.theme.breakPoints.mobile} {
+        width: 100%;
+        h1 {
+            font-size: 1.5rem;
+        }
+    }
 `;
