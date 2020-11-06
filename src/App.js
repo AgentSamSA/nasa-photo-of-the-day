@@ -10,10 +10,11 @@ import Background from "./Assets/starbackground.jpg";
 
 function App() {
   const [nasaData, setNasaData] = useState("");
+  const [date, setDate] = useState(nasaData.date);
 
   useEffect(() => {
     axios
-      .get(BASE_URL + API_KEY + "&date=2020-11-03")
+      .get(BASE_URL + API_KEY + "&date=" + date)
       .then(res => {
         console.log(res.data);
         setNasaData(res.data);
@@ -22,14 +23,13 @@ function App() {
         console.log("Error", err);
         setNasaData(err);
       });
-      return {}
-  }, []);
+  }, [date]);
 
   return (
     <StyledApp className="App">
       <Header />
       <Image nasaData={nasaData} key={nasaData.date} />
-      <Footer />
+      <Footer setDate={setDate}/>
     </StyledApp>
   );
 }
