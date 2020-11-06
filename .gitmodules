@@ -1,0 +1,3 @@
+[submodule "path_to_submodule"] 
+  path =  AgentSamSA/nasa-photo-of-the-day/DOM-I 
+  url = git://LambdaSchool/nasa-photo-of-the-day
