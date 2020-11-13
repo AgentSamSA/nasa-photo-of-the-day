@@ -57,6 +57,7 @@ const StyledDisplay = styled.div`
         width: 100%;
         background-color: ${pr => pr.theme.white};
         padding: 5px;
+        max-height: 60vh;
     }
 
     button {

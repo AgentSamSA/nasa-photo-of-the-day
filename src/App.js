@@ -7,6 +7,8 @@ import Image from "./Components/Image/Image.js";
 import {API_KEY, BASE_URL} from "./constants.js";
 import styled from "styled-components";
 import Background from "./Assets/starbackground.jpg";
+import * as yup from "yup";
+import schema from "./validations/formSchema";
 
 const initialFormValues = {
   year: "",
@@ -30,6 +32,20 @@ function App() {
   const [disabled, SetDisabled] = useState(initialDisabled);
 
   const updateForm = (name, value) => {
+    yup.reach(schema, name)
+    .validate(value)
+    .then(() => {
+      setFormErrors({
+        ...formErrors,
+        [name]: "",
+      })
+    })
+    .catch((err) => {
+      setFormErrors({
+        ...formErrors,
+        [name]: err.errors[0],
+      });
+    });
     setFormValues({
       ...formValues,
       [name]: value,
@@ -59,13 +75,18 @@ function App() {
       });
   }, []);
 
+  useEffect(() => {
+    schema.isValid(formValues).then(valid => {
+      SetDisabled(!valid);
+    });
+  }, [formValues]);
+
   return (
     <StyledApp className="App">
       <Header />
       <Image nasaData={nasaData} key={nasaData.date} />
       <Footer
       date={date}
-      setDate={setDate}
       setNasaData={setNasaData}
       api={API_KEY}
       base={BASE_URL}
@@ -85,7 +106,7 @@ const StyledApp = styled.div`
   flex-direction: column;
   align-items: center;
   background-image: url(${Background});
-  background-size: 100% 100%;
+  height: 100%;
   color: ${pr => pr.theme.white};
 
   font-family: 'Montserrat', sans-serif;

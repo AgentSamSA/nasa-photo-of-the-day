@@ -4,30 +4,18 @@ import axios from "axios";
 
 export default function Footer(props) {
 
-    const { date, setDate, setNasaData, api, base, values, change, submit, disabled, errors } = props;
-
-    const [dateValue, setDateValue] = useState("");
+    const { date, setNasaData, api, base, values, change, submit, disabled, errors } = props;
 
     const years = [];
 
     const days = [];
 
-    for (let i = 1995; i < 2021; i++) {
+    for (let i = 2020; i > 1994; i--) {
         years.push(<option key={i} value={i}>{i}</option>);
     }
 
     for (let i = 1; i < 32; i++) {
         days.push(<option key={i} value={i < 10 ? "0" + i : i}>{i}</option>);
-    }
-
-    const getDateValue = (event) => {
-        setDateValue(event.target.value);
-    }
-
-    const getNewDate = (event) => {
-        let newDate = dateValue;
-        console.log(newDate);
-        setDate(newDate);
     }
 
     const onChange = (event) => {
@@ -58,15 +46,25 @@ export default function Footer(props) {
             <h2>Enter a different date to see a new Image of the Day:</h2>
             <form onSubmit={onSubmit}>
                 <div className="date-selectors">
-                    <label>Year:
-                    <select className="year">
+                    <div className="year">
+                        <label>Year:</label>
+                        <select
+                            className="year"
+                            onChange={onChange}
+                            value={values.year}
+                            name="year">
                             <option value="">- Year -</option>
                             {years}
                         </select>
-                    </label>
+                    </div>
 
-                    <label>Month:
-                    <select className="month">
+                    <div className="month">
+                        <label>Month:</label>
+                        <select
+                            className="month"
+                            onChange={onChange}
+                            value={values.month}
+                            name="month">
                             <option value="">- Month -</option>
                             <option value="01">January</option>
                             <option value="02">February</option>
@@ -81,19 +79,23 @@ export default function Footer(props) {
                             <option value="11">November</option>
                             <option value="12">December</option>
                         </select>
-                    </label>
+                    </div>
 
-                    <label>Day:
-                    <select className="day">
+                    <div className="day">
+                        <label>Day:</label>
+                        <select
+                            className="day"
+                            onChange={onChange}
+                            value={values.day}
+                            name="day">
                             <option value="">- Day -</option>
                             {days}
                         </select>
-                    </label>
+                    </div>
                 </div>
-                {/* <input type="text" placeholder="yyyy-mm-dd" onChange={getDateValue}></input> */}
                 <button disabled={disabled}>Get new image</button>
             </form>
-        </StyledFooter>
+        </StyledFooter >
     )
 }
 
@@ -101,10 +103,22 @@ const StyledFooter = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    input {
-        margin: 2% 0;
+    width: 100%;
+    
+    form {
         width: 25%;
+    }
+
+    label {
+        display: block;
+    }
+
+    .date-selectors {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+        margin: 5% 0;
         text-align: center;
     }
 
