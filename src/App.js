@@ -8,9 +8,43 @@ import {API_KEY, BASE_URL} from "./constants.js";
 import styled from "styled-components";
 import Background from "./Assets/starbackground.jpg";
 
+const initialFormValues = {
+  year: "",
+  month: "",
+  day: "",
+}
+
+const initialFormErrors = {
+  year: "",
+  month: "",
+  day: "",
+}
+
+const initialDisabled = true;
+
 function App() {
   const [nasaData, setNasaData] = useState("");
   const [date, setDate] = useState(nasaData.date);
+  const [formValues, setFormValues] = useState(initialFormValues);
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
+  const [disabled, SetDisabled] = useState(initialDisabled);
+
+  const updateForm = (name, value) => {
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  }
+
+  const submitForm = () => {
+    const newDate = {
+      year: formValues.year.trim(),
+      month: formValues.month.trim(),
+      day: formValues.day.trim(),
+    }
+    setDate(`${newDate.year}-${newDate.month}-${newDate.day}`);
+    setFormValues(initialFormValues);
+  }
 
   useEffect(() => {
     axios
@@ -29,7 +63,17 @@ function App() {
     <StyledApp className="App">
       <Header />
       <Image nasaData={nasaData} key={nasaData.date} />
-      <Footer date={date} setDate={setDate} setNasaData={setNasaData} api={API_KEY} base={BASE_URL}/>
+      <Footer
+      date={date}
+      setDate={setDate}
+      setNasaData={setNasaData}
+      api={API_KEY}
+      base={BASE_URL}
+      values={formValues}
+      change={updateForm}
+      submit={submitForm}
+      disabled={disabled}
+      errors={formErrors}/>
     </StyledApp>
   );
 }
