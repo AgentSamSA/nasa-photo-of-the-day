@@ -71,7 +71,6 @@ function App() {
       })
       .catch(err => {
         console.log("Error", err);
-        setNasaData(err);
       });
   }, []);
 
@@ -93,8 +92,7 @@ function App() {
       values={formValues}
       change={updateForm}
       submit={submitForm}
-      disabled={disabled}
-      errors={formErrors}/>
+      disabled={disabled}/>
     </StyledApp>
   );
 }

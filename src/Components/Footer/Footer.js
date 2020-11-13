@@ -4,7 +4,7 @@ import axios from "axios";
 
 export default function Footer(props) {
 
-    const { date, setNasaData, api, base, values, change, submit, disabled, errors } = props;
+    const { date, setNasaData, api, base, values, change, submit, disabled } = props;
 
     const years = [];
 
@@ -37,7 +37,6 @@ export default function Footer(props) {
             })
             .catch(err => {
                 console.log("Error", err);
-                setNasaData(err);
             });
     }, [date]);
 
