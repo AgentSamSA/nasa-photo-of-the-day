@@ -4,7 +4,7 @@ import axios from "axios";
 import Header from "./Components/Header/Header.js";
 import Footer from "./Components/Footer/Footer.js";
 import Image from "./Components/Image/Image.js";
-import {API_KEY, BASE_URL} from "./constants.js";
+import { API_KEY, BASE_URL } from "./constants.js";
 import styled from "styled-components";
 import Background from "./Assets/starbackground.jpg";
 import * as yup from "yup";
@@ -33,19 +33,19 @@ function App() {
 
   const updateForm = (name, value) => {
     yup.reach(schema, name)
-    .validate(value)
-    .then(() => {
-      setFormErrors({
-        ...formErrors,
-        [name]: "",
+      .validate(value)
+      .then(() => {
+        setFormErrors({
+          ...formErrors,
+          [name]: "",
+        })
       })
-    })
-    .catch((err) => {
-      setFormErrors({
-        ...formErrors,
-        [name]: err.errors[0],
+      .catch((err) => {
+        setFormErrors({
+          ...formErrors,
+          [name]: err.errors[0],
+        });
       });
-    });
     setFormValues({
       ...formValues,
       [name]: value,
@@ -85,14 +85,14 @@ function App() {
       <Header />
       <Image nasaData={nasaData} key={nasaData.date} />
       <Footer
-      date={date}
-      setNasaData={setNasaData}
-      api={API_KEY}
-      base={BASE_URL}
-      values={formValues}
-      change={updateForm}
-      submit={submitForm}
-      disabled={disabled}/>
+        date={date}
+        setNasaData={setNasaData}
+        api={API_KEY}
+        base={BASE_URL}
+        values={formValues}
+        change={updateForm}
+        submit={submitForm}
+        disabled={disabled} />
     </StyledApp>
   );
 }

@@ -7,11 +7,11 @@ const Image = (props) => {
 
     if (!props.nasaData) return (
         <div>
-        <h2>Loading...</h2>
-        <h2>If an image has not been displayed, either you have entered an invalid date or NASA has reset their API.</h2>
-        <h2>If you are visiting the page after 4pm PST/PDT, the website will appear broken.</h2>
-        <h3>This is due to NASA prepping their API for the next day, as this is when it is 00:00 in Greenwich Mean Time (GMT).</h3>
-        <h3>For now, enter a new valid date in the menus to get another working image (fix perhaps coming)!</h3>
+            <h2>Loading...</h2>
+            <h2>If an image has not been displayed, either you have entered an invalid date or NASA has reset their API.</h2>
+            <h2>If you are visiting the page after 4pm PST/PDT, the website will appear broken.</h2>
+            <h3>This is due to NASA prepping their API for the next day, as this is when it is 00:00 in Greenwich Mean Time (GMT).</h3>
+            <h3>For now, enter a new valid date in the menus to get another working image (fix perhaps coming)!</h3>
         </div>
     );
 
@@ -58,7 +58,7 @@ const StyledDisplay = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 70%;
+        width: 50%;
     }
 
     img {
@@ -73,10 +73,10 @@ const StyledDisplay = styled.div`
     }
 
     .text-container {
-        width: 30%;
+        width: 40%;
         color: ${pr => pr.theme.white};
         background: ${pr => pr.theme.black};
-        font-size: 1.3rem;
+        font-size: 1.5rem;
     }
 
     @media ${pr => pr.theme.breakPoints.bigTablet} {
